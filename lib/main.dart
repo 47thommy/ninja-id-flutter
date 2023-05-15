@@ -6,9 +6,15 @@ void main() {
   ));
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int ninjaLevel = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +23,14 @@ class Home extends StatelessWidget {
         title: const Text("Ninja id card"),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            ninjaLevel += 1;
+          });
+        },
+        child: const Icon(Icons.add),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
@@ -28,6 +42,7 @@ class Home extends StatelessWidget {
                 backgroundImage: AssetImage("assets/avatar.png"),
               ),
             ),
+            const Divider(height: 10),
             Text(
               "Name",
               style: TextStyle(
@@ -54,9 +69,9 @@ class Home extends StatelessWidget {
               style: TextStyle(color: Colors.grey, letterSpacing: 2.0),
             ),
             const SizedBox(height: 6),
-            const Text(
-              "9",
-              style: TextStyle(
+            Text(
+              "$ninjaLevel",
+              style: const TextStyle(
                   color: Colors.amberAccent,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
